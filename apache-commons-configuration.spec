@@ -8,7 +8,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.9
-Release:        8.11%{?dist}
+Release:        8.12%{?dist}
 Summary:        Commons Configuration Package
 
 License:        ASL 2.0
@@ -18,29 +18,29 @@ BuildArch:      noarch
 
 BuildRequires:  %{?scl_prefix_java_common}maven-local
 BuildRequires:  %{?scl_prefix_java_common}javapackages-tools
-BuildRequires:  maven30-apache-commons-parent >= 26-7
-BuildRequires:  maven30-maven-antrun-plugin
-BuildRequires:  maven30-maven-assembly-plugin
-BuildRequires:  maven30-maven-compiler-plugin
-BuildRequires:  maven30-maven-doxia-sitetools
-BuildRequires:  maven30-maven-install-plugin
-BuildRequires:  maven30-maven-jar-plugin
-BuildRequires:  maven30-javacc-maven-plugin
-BuildRequires:  maven30-maven-javadoc-plugin
-BuildRequires:  maven30-maven-plugin-bundle
-BuildRequires:  maven30-maven-resources-plugin
-BuildRequires:  maven30-maven-surefire-plugin
-BuildRequires:  maven30-maven-surefire-provider-junit
+BuildRequires:  %{?scl_prefix}apache-commons-parent >= 26-7
+BuildRequires:  %{?scl_prefix}maven-antrun-plugin
+BuildRequires:  %{?scl_prefix}maven-assembly-plugin
+BuildRequires:  %{?scl_prefix}maven-compiler-plugin
+BuildRequires:  %{?scl_prefix}maven-doxia-sitetools
+BuildRequires:  %{?scl_prefix}maven-install-plugin
+BuildRequires:  %{?scl_prefix}maven-jar-plugin
+BuildRequires:  %{?scl_prefix}javacc-maven-plugin
+BuildRequires:  %{?scl_prefix}maven-javadoc-plugin
+BuildRequires:  %{?scl_prefix}maven-plugin-bundle
+BuildRequires:  %{?scl_prefix}maven-resources-plugin
+BuildRequires:  %{?scl_prefix}maven-surefire-plugin
+BuildRequires:  %{?scl_prefix}maven-surefire-provider-junit
 
 BuildRequires:  %{?scl_prefix_java_common}apache-commons-beanutils
 BuildRequires:  %{?scl_prefix_java_common}apache-commons-codec
 BuildRequires:  %{?scl_prefix_java_common}apache-commons-collections
-BuildRequires:  maven30-apache-commons-digester
-BuildRequires:  maven30-apache-commons-jexl
-BuildRequires:  maven30-apache-commons-jxpath
+BuildRequires:  %{?scl_prefix}apache-commons-digester
+BuildRequires:  %{?scl_prefix}apache-commons-jexl
+BuildRequires:  %{?scl_prefix}apache-commons-jxpath
 BuildRequires:  %{?scl_prefix_java_common}apache-commons-lang
 BuildRequires:  %{?scl_prefix_java_common}apache-commons-logging
-BuildRequires:  maven30-apache-commons-vfs
+BuildRequires:  %{?scl_prefix}apache-commons-vfs
 BuildRequires:  %{?scl_prefix_java_common}tomcat-servlet-3.0-api
 BuildRequires:  %{?scl_prefix_java_common}xml-commons-resolver
 
@@ -70,13 +70,13 @@ Summary:        API documentation for %{pkg_name}
 
 %prep
 %setup -q -n %{short_name}-%{version}-src
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %{__sed} -i 's/\r//' LICENSE.txt NOTICE.txt
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_file   : %{short_name} %{pkg_name}
 %mvn_alias  : org.apache.commons:%{short_name}
@@ -85,7 +85,7 @@ set -e -x
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -98,6 +98,9 @@ set -e -x
 
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.9-8.12
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 1.9-8.11
 - maven33 rebuild
 
